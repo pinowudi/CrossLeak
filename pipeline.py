@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 import logging
 from src.association import utils, association, feature_extraction
