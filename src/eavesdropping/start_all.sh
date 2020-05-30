@@ -15,6 +15,6 @@ while true; do
 	echo("time up")
 
 	./renaming.py
-	./file_transfer.py
+#	./file_transfer.py
 
 done
