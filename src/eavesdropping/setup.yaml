@@ -1,9 +1,9 @@
-wlan_name: "mywifi"
+wlan_name: "wlan0"
 
-raw_video_folder: "raw/"
-dated_video_folder: "video/"
-wifi_data_folder: "wifi/"
-audio_folder: "audio/"
+raw_video_folder: "/tmp/raw/"
+dated_video_folder: "/tmp/video/"
+wifi_data_folder: "/tmp/wifi/"
+audio_folder: "/tmp/audio/"
 
 V_FILE_BUFFER: 1048576
 V_REC_SECONDS: 10
