@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#!/usr/bin/env python
 from multiprocessing import Process
 import os
 import time
@@ -15,7 +15,7 @@ def start_tshark():
     os.system('sudo ifconfig '+wlan_name+' down')
     os.system('sudo iwconfig '+wlan_name+' mode monitor')
     os.system('sudo ifconfig '+wlan_name+' up')
-    os.system("tshark -i "+wlan_name+" -Y \"wlan.sa and wlan.fc.type_subtype == 0x0008\" -T fields -e frame.time -e wlan.sa_resolved -e radiotap.channel.freq -e radiotap.dbm_antsignal >" + FOLDER + "$(date '+%Y_%m_%d_%H_%M_%S').txt")
+    os.system("tshark -i "+wlan_name+" -Y \"wlan.sa and wlan.fc.type_subtype == 0x08\" -T fields -e frame.time -e wlan.sa_resolved -e radiotap.channel.freq -e radiotap.dbm_antsignal >" + FOLDER + "$(date '+%Y_%m_%d_%H_%M_%S').txt")
 
 def channel_hop():
     channels = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
