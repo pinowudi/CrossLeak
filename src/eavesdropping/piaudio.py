@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#!/usr/bin/env python
 """
 with every frame that comes in:
     check if it is_speech 
@@ -20,6 +20,7 @@ import webrtcvad
 import datetime
 from pathlib import Path
 import yaml
+import os
 
 with open("setup.yaml", "r") as f:
     setup = yaml.load(f, Loader=yaml.FullLoader)
@@ -64,10 +65,10 @@ def main():
                     input=True,
                     frames_per_buffer=CHUNK)
 
-    #print("recording")
+    print("recording")
     while True:
         # read a section of 30ms
-        data = stream.read(CHUNK)
+        data = stream.read(CHUNK, exception_on_overflow = False)
         is_speech = vad.is_speech(data, RATE)
 
         if not speech:
@@ -78,8 +79,8 @@ def main():
             if num_speech>0.9*num_padding_frames:
                 speech = True
                 time = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S.%f")
-                #print(time + "\n")
-                #print("you started speaking")
+                print(time)
+                print("you started speaking")
                 for data, speech in ring_buffer:
                     voiced_frames.append(data)
                 ring_buffer.clear()
@@ -95,7 +96,7 @@ def main():
                 write_wave(FILE_PATTERN%time,sentence,RATE)
                 ring_buffer.clear()
                 voiced_frames=[]
-                #print("you finished speaking")
+                print("you finished speaking\n")
 
 
 
